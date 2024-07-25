@@ -1,0 +1,72 @@
+
+.upload-marks {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  }
+
+  .upload-marks::-webkit-scrollbar{
+    display: none;
+  }
+  
+  .student-select, .subject-select, .mark-input {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  select, input {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+
+  .LowerMarks{
+    
+    width: 95.4%;
+    padding: 20px;
+  }
+  
+  button[type="submit"] {
+    font-size: .8rem;
+    outline: none;
+    border-radius: .2rem;
+    padding: 20px;
+    margin: 8px;
+    width: 321px;
+    cursor: pointer;
+    margin-top: 8px;
+    background-color: #0e365d;
+    color: white;
+  }
+  
+  .mark-history {
+    margin-top: 40px;
+  }
+  
+  .mark-history ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .mark-history li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .mark-history li:last-child {
+    border-bottom: none;
+  }
+  
+  
+
+  .MainCard::-webkit-scrollbar{
+
+    display: none;
+  }

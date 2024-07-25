@@ -1,0 +1,52 @@
+.InputField{
+    display: none;
+}
+
+
+.ButtonsUp{
+
+
+    background-color: aquamarine;
+    padding: 18px;
+    margin-top: 20px;
+    width: 400px;
+    margin-left: 50px;
+
+
+    font-size: .8rem;
+    outline: none;
+    border-radius: .2rem;
+    cursor: pointer;
+    background-color: #0e365d;
+    color: white;
+
+
+  
+
+}
+
+.tablecontainer {
+    overflow-y: auto;
+    max-height: 500px;
+   /* Adjust the value to your liking */
+  
+  }
+
+  .tablecontainer::-webkit-scrollbar {
+    display: none;
+  }
+  
+
+
+  .Status{
+   width: 100%;
+  }
+
+
+  .thData{
+    text-align: center;
+  }
+
+  .Status select{
+    width: 200px;
+  }

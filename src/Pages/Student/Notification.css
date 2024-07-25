@@ -1,0 +1,97 @@
+.chat-message {
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #eee;
+    display: flex; /* Enable flexbox for horizontal layout */
+  }
+  
+  .sender-info {
+    flex: 0 0 auto; /* Allow sender info to shrink and not occupy full space */
+    margin-right: 10px;
+  }
+  
+  .username {
+    font-weight: bold;
+  }
+  
+  .message-content {
+    flex: 1;
+     /* Allow message content to fill remaining space */
+  }
+  
+
+  /* COMPLAINT CSS */
+
+  .complaint-section {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #ffffff; /* Lighter background color */
+    width: 100%;
+  }
+  
+  .complaint-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 4px;
+  }
+  select{
+    outline: none;
+    border-radius: 0%;
+    width: 100%;
+  }
+
+  .complaint-form label {
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif; /* Using Roboto font */
+  }
+  
+  .complaint-form select,
+  .complaint-form textarea,
+  .complaint-form input[type="file"] {
+    border: 1px solid #ddd; /* Slightly lighter border */
+    border-radius: 3px;
+    width: 100%;
+    resize: none; /* Disable textarea resize */
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+  
+  .complaint-form textarea {
+    min-height: 200px;
+    border-radius: 1px ;
+    outline: none;
+
+    
+    /* Set minimum height for textarea */
+  }
+  
+  .complaint-form button[type="submit"] {
+    background-color: #c02230; /* Blue button */
+    color: white;
+    padding: 15px 30px; /* Adjusted padding */
+    border: none;
+    border-radius: 5px; /* Reduced border radius */
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .complaint-form button[type="submit"]:hover {
+    background-color: #9a3b43;/* Darker blue hover effect */
+  }
+  
+  .complaint-file-label {
+    display: inline-block;
+    width: 120px;
+    text-align: right;
+    font-weight: bold;
+  }
+  
+  .complaint-file-input {
+    padding: 5px;
+    border: 1px solid #ddd; /* Lighter border */
+    border-radius: 3px;
+  }
+  

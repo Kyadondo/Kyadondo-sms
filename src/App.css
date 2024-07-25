@@ -1,0 +1,32 @@
+.form-container{
+    width: 1000px;
+    margin: 7% auto;
+}
+
+.title, .slogan{
+    text-align: center;
+}
+
+.btn{
+    background-color: rgb(14, 54, 93);
+    color: white;
+    background-origin: padding-box;
+    width: 100%;
+    padding: 25px;
+
+
+}
+
+.auth-image{
+    width: 100%;
+    height: 60%;
+    border-radius: 10px;
+    margin:auto;
+}
+
+
+.alert{
+
+    margin-bottom: 1.5rem;
+}
+
