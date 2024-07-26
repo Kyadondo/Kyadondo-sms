@@ -2,6 +2,7 @@ import React from 'react'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 
+
 import  Home  from './components/Home';
 import TeacherSign from './components/TeacherSign';
 import StudentSign from './components/StudentSign';
@@ -49,10 +50,13 @@ import Students from './Pages/Admin/Students';
 
 
 
+
 export const App = () => {
 
   return (
 
+
+   
     <Router>
       <Routes>
 
@@ -103,7 +107,11 @@ export const App = () => {
 
       {/* Admin Routes Down Here */}
 
-      < Route path="/Admin/Dashboard" element={<AdminDashboard/> }/>
+
+
+     
+
+      <Route path="/admin/dashboard" element={<AdminDashboard/>} />
       < Route path="/Admin/Calender" element={<Calender/> }/>
       < Route path="/Admin/Classes" element={<Classes/> }/>
       < Route path="/Admin/Enrollments" element={<Enrollments/> }/>
@@ -119,6 +127,9 @@ export const App = () => {
 
       </Routes>
     </Router>
+
+
+
   )
 }
 

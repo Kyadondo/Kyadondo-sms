@@ -115,7 +115,9 @@ export const EnrollmentForm = () => {
         nationalID: '',
         passportNumber: '',
         expiryDate: '',
-        classId: ''
+        classId: '',
+        Username: '',
+        password: '',
     });
 
    
@@ -160,7 +162,9 @@ export const EnrollmentForm = () => {
             nationalID: '',
             passportNumber: '',
             expiryDate: '',
-            classId: ''
+            classId: '',
+            Username: '',
+            password: ''
         });
     };
 
@@ -199,6 +203,12 @@ export const EnrollmentForm = () => {
         if(!teacherData.village){
             errors.village = 'Village is Required';
         }
+        if(!teacherData.Username){
+            errors.Username = 'Username is Required'
+        }
+        if(!teacherData.password){
+            errors.password = 'Password is Required'
+        }
         if(!teacherData.nationalID){
             errors.nationalID = 'National ID is Required';
         }
@@ -208,6 +218,8 @@ export const EnrollmentForm = () => {
      {   if(!teacherData.classId){
            errors.classId= ' Class is Required';
        }}
+
+       
     return errors;
 
     };
@@ -464,6 +476,30 @@ export const EnrollmentForm = () => {
                                         </option>
                                     ))}
                                 </Selector>
+                            </Labels>
+                            <Labels htmlFor="Username">
+                                <p>Username</p>
+                                <Inputter
+                                    name="Username"
+                                    value={teacherData.Username}
+                                    onChange={handleInputChange}
+                                    placeholder="Username"
+                                    required
+                                >
+                                    
+                                </Inputter>
+                            </Labels>
+                            <Labels htmlFor="password">
+                                <p>Password</p>
+                                <Inputter
+                                    name="password"
+                                    value={teacherData.password}
+                                    onChange={handleInputChange}
+                                    placeholder="Password"
+                                    required
+                                >
+                                    
+                                </Inputter>
                             </Labels>
                         </ThreeDetails>
                     </section>

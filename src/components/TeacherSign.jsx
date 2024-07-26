@@ -11,21 +11,40 @@ import {
 } from '../styles/StudentSignInStyles';
 
 import SBanner from '../assets/SBanner.jpg'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
-export const AdminSign = () => {
+export const TeacherSign = () => {
 
   
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
    
 
+  const handleSubmit = async (e) => {
 
-    const HandleSignInClick = () =>{
-        
-       console.log('Teaccher Logged In Success', { email, password});
-    };
+    e.preventDefault();
 
+    setErrorMessage(""); // Clear any previous error messages
+    try {
+      console.log("Sending request to backend");
+      const response = await axios.post('http://localhost:3000/api/v1/teachers/login', { username, password });
+      console.log("Response received from backend:", response);
+      
+      if (response.data.status) {
+        navigate('/Teacher/Dashboard');
+      } else {
+        setErrorMessage(response.data.message || "Login failed");
+      }
+    } catch (err) {
+      setErrorMessage("An error occurred during login. Please try again.");
+      console.error("Error during login:", err);
+    }
+  };
+
+  
 
   return (
     
@@ -39,12 +58,15 @@ export const AdminSign = () => {
           <Headings> Welcome Back!</Headings>
 
         <Liner />
+        {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
             <InputField
             
             type='email'
+            id="username"
+            autoComplete="off"
             placeholder='Email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
             
             
@@ -52,13 +74,15 @@ export const AdminSign = () => {
             <InputField
             
             type='password'
+            id="password"
+            autoComplete="off"
             placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
         
             />
-            <SubmitButton to="/Teacher/Dashboard" type="button" onClick={HandleSignInClick}>Sign In</SubmitButton>
+            <SubmitButton type="button" onClick={handleSubmit}>Sign In</SubmitButton>
         </FormContainer>
     </StudentSignInContainer>
     
@@ -67,4 +91,4 @@ export const AdminSign = () => {
 }
 
 
-export default AdminSign;
+export default TeacherSign;

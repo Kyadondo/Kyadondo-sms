@@ -1,122 +1,76 @@
-import React, { useState,  useRef, useEffect, useContext } from 'react'
-import AuthContext from '../context/AuthProvider.jsx'
-import api from '../api/api.js'
-
-import {
-    StudentSignInContainer,
-    FormContainer,
-    InputField,
-    SubmitButton,
-    Headings,
-    Logo,
-    LogoIn,
-    Liner,
-    BelowTag,
-    Edit
-} from '../styles/StudentSignInStyles';
-
-import SBanner from '../assets/SBanner.jpg';
+import React, { useState } from 'react';
 import axios from 'axios';
-
-
-
-
-const LOGIN_URL = '/AdminAuth';
-
+import { useNavigate } from 'react-router-dom';
+import {
+  StudentSignInContainer,
+  FormContainer,
+  InputField,
+  SubmitButton,
+  Headings,
+  Logo,
+  LogoIn,
+  Liner,
+  BelowTag,
+  Edit
+} from '../styles/StudentSignInStyles';
+import SBanner from '../assets/SBanner.jpg';
 
 export const AdminSign = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
-    const { setAuth } = useContext(AuthContext);
-  
-    const userRef = useRef();
-    const errRef = useRef();
-
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const [ErrMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
-
-
-    useEffect(() => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMessage(""); // Clear any previous error messages
+    try {
+      console.log("Sending request to backend");
+      const response = await axios.post('http://localhost:3000/api/v1/auth/login', { username, password });
+      console.log("Response received from backend:", response);
       
-      userRef.current.focus();
-
-    }, [])
-
-
-    useEffect(() => {
-      setErrMsg('');
-
-    }, [email, password])
-
-
-   
-
-
-    const HandleSignInClick = () =>{
-        
-
-       console.log('Admin Logged in', { email, password});
-
-
-    };
-
-
-
-
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-
-  
-
+      if (response.data.status) {
+        navigate('/Admin/Dashboard');
+      } else {
+        setErrorMessage(response.data.message || "Login failed");
+      }
+    } catch (err) {
+      setErrorMessage("An error occurred during login. Please try again.");
+      console.error("Error during login:", err);
     }
+  };
 
   return (
     <StudentSignInContainer> 
-      <p ref={errRef} className={ErrMsg ? "errmsg" : " offscreen"} aria-live="assertive">{ErrMsg} </p>
-        <FormContainer onSubmit={handleSubmit}>
-          <Logo>
-
-            <LogoIn src={SBanner} />
-
-          </Logo>
-          <Headings> Welcome Back! Admin</Headings>
-
+      <FormContainer onSubmit={handleSubmit}>
+        <Logo>
+          <LogoIn src={SBanner} />
+        </Logo>
+        <Headings> Welcome Back! Admin</Headings>
         <Liner />
-            <InputField
-            
-            type="email"
-            id="emailId"
-            ref={userRef}
-            autoComplete="off"
-            placeholder='Email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            
-            
-            />
-            <InputField
-
-            type='password'
-            id="password"
-            placeholder='Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-        
-            />
-            <SubmitButton to="/Admin/Dashboard" type="button" onClick={HandleSignInClick}>Sign In</SubmitButton>
-
-            <BelowTag> Kyadondo Technical Institute <Edit>Busabala</Edit></BelowTag>
-        </FormContainer>
+        {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+        <InputField
+          type="email"
+          id="username"
+          autoComplete="off"
+          placeholder='Username'
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <InputField
+          type='password'
+          id="password"
+          placeholder='Password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <SubmitButton type="button" onClick={handleSubmit}>Sign In</SubmitButton>
+        <BelowTag> Kyadondo Technical Institute <Edit>Busabala</Edit></BelowTag>
+      </FormContainer>
     </StudentSignInContainer>
-    
-
-  )
+  );
 }
-
 
 export default AdminSign;

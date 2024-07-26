@@ -11,20 +11,37 @@ import {
 } from '../styles/StudentSignInStyles';
 
 import SBanner from '../assets/SBanner.jpg'
+import { useNavigate } from 'react-router-dom';
 
 export const AdminSign = () => {
 
-  
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-   
 
+const handleSubmit = async (e) => {
 
-    const HandleSignInClick = () =>{
+      e.preventDefault();
+
+      setErrorMessage(""); // Clear any previous error messages
+      try {
+        console.log("Sending request to backend");
+        const response = await axios.post('http://localhost:3000/api/v1/auth/login', { username, password });
+        console.log("Response received from backend:", response);
         
-       console.log('EO Logged In Successfully', { email, password});
+        if (response.data.status) {
+          navigate('/EnrollementOffice/EnrollStudent');
+        } else {
+          setErrorMessage(response.data.message || "Login failed");
+        }
+      } catch (err) {
+        setErrorMessage("An error occurred during login. Please try again.");
+        console.error("Error during login:", err);
+      }
     };
+
 
 
   return (
@@ -39,12 +56,15 @@ export const AdminSign = () => {
           <Headings> Welcome Back!</Headings>
 
         <Liner />
+        {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
             <InputField
             
             type='email'
+            id = "username"
+            autoComplete="off"
             placeholder='Email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
             
             
@@ -52,13 +72,14 @@ export const AdminSign = () => {
             <InputField
             
             type='password'
+            id="password"
             placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
         
             />
-            <SubmitButton to="/EnrollmentOffice/EnrollStudent" type="button" onClick={HandleSignInClick}>Sign In</SubmitButton>
+            <SubmitButton type="button" onClick={handleSubmit}>Sign In</SubmitButton>
         </FormContainer>
     </StudentSignInContainer>
     
